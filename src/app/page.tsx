@@ -9,10 +9,13 @@ export default function Home() {
             A fully featured <span className="text-blue-600">Organization</span>
           </Title>
           <Text c="dimmed" size="lg" className="mb-8 max-w-lg mx-auto lg:mx-0">
-            We build fully functional accessible web applications faster than ever Mantine includes more than 100 customizable components and 50 hooks to 
+            We build fully functional accessible web applications faster than ever – 
+            Mantine includes more than 100 customizable components and 50 hooks to 
             cover you in any situation.
           </Text>
-          <Group justify="center" lg="justify-start">
+          
+          {/* FIX: Use Mantine's object syntax for responsive alignment */}
+          <Group justify={{ base: 'center', lg: 'flex-start' }}>
             <Button size="lg" variant="filled" color="blue">Get started</Button>
             <Button size="lg" variant="default">GitHub</Button>
           </Group>
