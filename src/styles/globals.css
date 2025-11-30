@@ -1,0 +1,18 @@
+/* src/styles/globals.css */
+:root {
+  --mantine-color-gray-3: #e9ecef;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+main {
+  min-height: calc(100vh - 200px); /* temporary spacing until footer/header are final */
+  padding: 24px;
+}
