@@ -14,11 +14,20 @@ export default function Home() {
             cover you in any situation.
           </Text>
           
-          {/* FIX: Use Mantine's object syntax for responsive alignment */}
-          <Group justify={{ base: 'center', lg: 'flex-start' }}>
+          {/* FIX: Render specific Groups for specific breakpoints to avoid TS errors on 'justify' prop */}
+          
+          {/* Mobile View: Centered (Hidden on Large screens) */}
+          <Group justify="center" hiddenFrom="lg">
             <Button size="lg" variant="filled" color="blue">Get started</Button>
             <Button size="lg" variant="default">GitHub</Button>
           </Group>
+
+          {/* Desktop View: Left Aligned (Visible only on Large screens) */}
+          <Group justify="flex-start" visibleFrom="lg">
+            <Button size="lg" variant="filled" color="blue">Get started</Button>
+            <Button size="lg" variant="default">GitHub</Button>
+          </Group>
+
         </div>
         
         {/* Placeholder for Hero Image */}
