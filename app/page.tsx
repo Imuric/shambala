@@ -1,14 +1,14 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
+import FeaturesSectionDemo from "@/components/FeaturesSectionDemo"; // 👈 The new 3D Globe Grid
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black">
       <Navbar />
       <Hero />
-      <Services />
+      <FeaturesSectionDemo />
       <Footer />
     </main>
   );
