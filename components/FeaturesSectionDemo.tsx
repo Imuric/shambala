@@ -141,7 +141,7 @@ export const SkeletonThree = () => {
                     {/* Youtube Icon */}
                     <IconBrandYoutubeFilled className="h-20 w-20 absolute z-10 inset-0 text-red-500 m-auto " />
                     <img
-                        src="https://assets.aceternity.com/fireship.jpg"
+                        src="https://img.youtube.com/vi/1XOJFuKHCck/maxresdefault.jpg"
                         alt="header"
                         width={800}
                         height={800}
