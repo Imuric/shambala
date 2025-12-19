@@ -1,18 +1,14 @@
-"use client"; // <--- THIS FIXES THE ERROR
+"use client";
 
 import Link from "next/link";
 import { GeistSans } from "geist/font/sans";
+import Spline from '@splinetool/react-spline';
 
 export default function ComingSoon() {
   return (
     <main
-      className={`relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white ${GeistSans.className}`}
+      className={`relative min-h-screen w-full bg-black text-white overflow-hidden ${GeistSans.className}`}
     >
-      {/* -------------------------------------------
-        1. LOCAL STYLES FOR ANIMATION
-        (Now works because of "use client" at the top)
-        -------------------------------------------
-      */}
       <style jsx>{`
         @keyframes industrial-load {
           0% { left: -30%; width: 30%; }
@@ -25,64 +21,72 @@ export default function ComingSoon() {
       `}</style>
 
       {/* -------------------------------------------
-        2. BACKGROUND (Dot Grid + Vignette)
+        LAYER 1: SPLINE SCENE (Global Background)
+        UPDATE: Changed 'inset-0' to '-inset-12'.
+        - This makes the viewer larger than the screen.
+        - The "Built with Spline" logo (bottom-right) gets pushed off-screen.
         -------------------------------------------
       */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute h-full w-full bg-[radial-gradient(rgba(255,255,255,0.15)_1px,transparent_1px)] [background-size:24px_24px]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)]"></div>
+      <div className="absolute -inset-12 z-0">
+        <Spline 
+          scene="https://prod.spline.design/4YtZJNDKoOOgX-MQ/scene.splinecode"
+          className="h-full w-full"
+        />
       </div>
 
       {/* -------------------------------------------
-        3. MAIN CONTENT
+        LAYER 2: CONTENT GRID
         -------------------------------------------
       */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-3xl">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-white">
-          InfyNex
-        </h1>
+      <div className="relative z-10 grid h-screen w-full grid-cols-1 md:grid-cols-2 pointer-events-none">
+        
+        {/* --- SECTION 1: TEXT (Left Side) --- 
+            Kept your 'md:pl-64' spacing
+        */}
+        <div className="flex flex-col justify-center px-6 md:pl-64 md:pr-10 pointer-events-auto">
+          <div className="max-w-lg">
+             {/* Logo */}
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl">
+              InfyNex
+            </h1>
 
-        <h2 className="text-2xl md:text-3xl font-semibold mb-4 tracking-tight">
-          System Upgrading
-        </h2>
+            {/* Headline */}
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-white tracking-tight drop-shadow-lg">
+              System Upgrading
+            </h2>
 
-        <p className="text-neutral-400 max-w-lg text-sm md:text-base leading-relaxed mb-8">
-          InfyNex Industrial Solutions is upgrading its digital infrastructure.
-          We are building a robust platform to serve you better. Full access
-          will be restored shortly.
-        </p>
+            {/* Description */}
+            <p className="text-neutral-200 text-base md:text-lg leading-relaxed mb-10 font-medium drop-shadow-md">
+              InfyNex Industrial Solutions is upgrading its digital infrastructure.
+              We are building a robust platform to serve you better.
+            </p>
 
-        {/* PROGRESS BAR COMPONENT */}
-        <div className="w-full max-w-md h-[2px] bg-neutral-800 relative overflow-hidden mb-10">
-          <div className="absolute top-0 bottom-0 bg-neutral-50 animate-industrial-load"></div>
+            {/* PROGRESS BAR */}
+            <div className="w-full h-[2px] bg-neutral-700/50 relative overflow-hidden mb-12 rounded-full backdrop-blur-sm">
+              <div className="absolute top-0 bottom-0 bg-white animate-industrial-load shadow-[0_0_15px_rgba(255,255,255,0.8)]"></div>
+            </div>
+
+            {/* CTA Button */}
+            <Link
+              href="mailto:contact@infynex.org"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-sm font-bold text-black transition-transform hover:scale-105 shadow-xl"
+            >
+              Contact Support
+            </Link>
+          </div>
+          
+          {/* Footer */}
+          <div className="absolute bottom-8 left-6 md:left-64 text-xs text-neutral-400 font-mono tracking-widest uppercase">
+            © 2025 InfyNex Inc.
+          </div>
         </div>
 
-        <Link
-          href="mailto:contact@infynex.org"
-          className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-medium text-black transition-all hover:scale-105 hover:bg-neutral-200"
-        >
-          Contact Support
-        </Link>
-      </div>
+        {/* --- SECTION 2: EMPTY (Right Side) --- */}
+        <div className="hidden md:block">
+           {/* Empty space */}
+        </div>
 
-      {/* -------------------------------------------
-        4. WATERMARK
-        -------------------------------------------
-      */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-0 flex justify-center overflow-hidden">
-        <span className="translate-y-[35%] whitespace-nowrap text-[18vw] font-bold leading-none tracking-tighter text-neutral-900 opacity-60 select-none">
-          InfyNex
-        </span>
       </div>
-
-      {/* -------------------------------------------
-        5. FOOTER
-        -------------------------------------------
-      */}
-      <footer className="absolute bottom-6 left-0 right-0 z-20 flex w-full justify-between px-6 text-xs text-neutral-500 md:px-12">
-        <span>© 2025 InfyNex Inc. All rights reserved.</span>
-        <span className="hidden md:inline">Designed for the future.</span>
-      </footer>
     </main>
   );
 }
